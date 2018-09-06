@@ -1,0 +1,55 @@
+{% extends "base.html"  %}
+{% load static %}
+{% load blog_tags %}
+
+{% block stylesheet %}
+   	<link rel="stylesheet" href="{% static 'css/styles-imageoverlay-blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles-blog.css' %}" >
+
+
+{% endblock stylesheet %}
+
+{% block title %}
+    {{ category|title }} - {{ block.super }}
+{% endblock title %}
+
+
+{% block body-header %}
+    Alle Posts zur Kategorie -  {{ category.name }}{% endblock body-header %}
+
+     {% block breadcrumb %}
+     {% endblock breadcrumb %}
+
+{% block content %}
+
+{% for post in posts %}
+{% fader as f %}
+
+	<!-- mit css: Imageoverlayer -->
+
+	 <div class="container-flex col-md-6 col-lg-6">
+		<div class="content">
+	        <a href="{{ post.get_absolute_url }}">
+	        <div class="content-overlay"></div>
+			<img class="content-image" src="{{ post.starter_image_post.url }}">
+			<div class="content-details {{ f }}">
+	            <h3 class="content-title">{{ post.title|capfirst }}</h3>
+				<p class="content-text">{{ post.content | safe | truncatewords:8|linebreaks }}</p>
+	            <p class="content-text">Comments (Approved): {{ post.approved_comments.count }}</p>
+	        </div>
+			</a>
+		</div>
+     </div>
+     {% endfor %}
+
+	{% endblock content %}
+     <!-- Pagination not neccesary-->
+	{% block pagination %}
+<div class="d-flex justify-content-center p-4" body style="background-color:rgb(141, 141, 141);color: black;">{% include 'pagination.html' %}</div>
+	{% endblock pagination %}
+
+
+
+     {% block sidebar %}
+		{% include 'blog/blog-sidebar.html' %}
+	  {% endblock sidebar %}

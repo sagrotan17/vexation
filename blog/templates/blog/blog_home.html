@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+{% block title %}Blogs{% endblock title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/styles-blog.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles-hover-blog.css' %}">
+{% endblock stylesheet %}
+
+
+
+     {% block body-header %}
+     Verschiedene Themenbereiche
+     {% endblock body-header %}
+
+
+     {% block breadcrumb %}
+     {% endblock breadcrumb %}
+
+
+{% block content %}
+
+			{% for cat in categories %}
+
+				<!-- mit css: hovereffectcards -->
+	           
+				   <div class="card col-md-6 col-lg-6">				
+	                <div class="hovereffect">
+						<img src="{{ cat.starter_image_cat.url }}" class="img-responsive" alt="test">
+						<a href="{% url 'post_by_category' cat.slug %}">
+						<div class="overlay">
+
+
+	                        <h2>{{ cat.name }}</h2>
+							<p>Weiter</p>
+							</div>
+						</a>
+                     </div>
+	               </div>
+			{% endfor %}
+ <!-- Pagination not neccesary-->
+
+
+
+{% endblock content %}
+
+          {% block sidebar %}
+			{% include 'blog/blog-sidebar.html' %}
+          {% endblock sidebar %}
+          
+
+

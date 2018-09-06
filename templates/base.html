@@ -1,0 +1,146 @@
+{% load static %}
+{% load flatpages %}<!DOCTYPE html>
+<html lang="de">
+  <head>
+          <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+      <title>{% block title %}Vexation{% endblock title %}</title>
+
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-vexation-basic.css' %}">
+          <link rel="stylesheet" href="{% static 'css/styles-blog.css' %}" >
+
+
+      {% block stylesheet %}{% endblock stylesheet%}
+      {% block head %}{% endblock head %}
+
+    </head>
+
+  <body>
+
+      {% block nav %}
+
+ <nav class="navbar navbar-expand-sm navbar-dark bg-inverse">
+  <a class="navbar-brand" href="{% url 'mixed:home' %}">vexationHome</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'gallery_home' %}">Photogalleries</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'blog_home' %}">Blogs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact:email' %}">Kontakt</a>
+      </li>
+
+        <!-- HIER KOMMT NUN DER AUTOMATISCH GEFÜLLTE DROPDOWN ZU FLATPAGES: -->
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Disclaimer</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          {% get_flatpages as flatpages %}
+          {% for page in flatpages %}
+
+          <a class="dropdown-item" href="/pages{{ page.url }}">{{ page.title }}</a>
+          {% endfor %}
+
+        </div>
+      </li>
+
+      <!-- ENDE DES AUTOMATISCH GEFÜLLTEN DROPDOWN ZU FLATPAGES: -->
+
+      <li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'django.contrib.sitemaps.views.sitemap' %}">Sitemap</a>
+      </li>
+
+
+
+   </ul>
+  </div>
+</nav>
+      {% endblock nav %}
+
+      <!-- Hier fängt der 'Block Body' an -->
+       {% block body %}
+
+<div class="container-fluid"> <!-- Gesamt-CONTAINER -->
+  <div class="row"> <!-- Gesamt-ROW -->
+
+    <!-- Header DIV über Gesamtbreite -->
+    <div class="container-fluid p-2" ><header><h2>
+     {% block body-header %}
+     {% endblock body-header %}
+      </h2></header>
+    </div>
+
+
+      <!-- Breadcrumb DIV über Gesamtbreite -->
+      <div class="container-fluid p-3" body style="background-color:rgb(224, 125, 4);">
+          {% block breadcrumb %}
+          {% endblock breadcrumb %}
+
+       </div>
+
+
+      <!-- HIER fängt Container an, der in 9 + 3 Grid beginnt -->
+
+      <div class="col-lg-9" body style="background-color:rgb(141, 141, 141);">
+
+        <!-- HIER fängt das Grid mit 9 cols an-->
+
+        <!-- Zunächst wieder ein Container  -->
+        <div class="container-fluid"><!-- Container für grid 9 cols -->
+          <div class="row"><!-- Row für grid 9 cols -->
+
+            <!-- HIER fangen die Cards im grid 9 cols an-->  
+
+              {% block content %}
+
+              {% endblock content %}
+
+
+
+
+            <!-- Beiden schliessenden DIVs von 9er container fluid und row: -->
+          </div>
+        </div>
+                {% block pagination %}
+              {% endblock pagination %}
+
+      </div><!-- Ende col-sm-9 -->
+
+        <!-- Beginn der col-sm-3 Sidebar -->   
+      <div class="col-lg-3" body style="background-color: rgb(141, 141, 141);">
+
+        <div class="container-fluid">
+
+          {% block sidebar %}
+
+          {% endblock sidebar %}
+        </div><!-- Ende container fluid -->
+      
+      </div><!--Ende der col-sm-3 Sidebar -->
+    </div><!-- Ende row -->        
+  </div> <!-- Ende container fluid -->
+    {% endblock body %}
+
+    <!-- Hier endet der Body -->
+
+
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+      {% block javascript %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,51 @@
+{% extends "base.html"  %}
+{% load static %}
+
+{% block stylesheet %}
+   	<link rel="stylesheet" href="{% static 'css/styles-imageoverlay-blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles-blog.css' %}" >
+
+
+{% endblock stylesheet %}
+
+{% block title %}
+    {{ tag|title }} - {{ block.super }}
+{% endblock %}
+
+
+{% block body-header %}
+    Alle Posts mit dem Tag - {{ tag.name }}
+{% endblock body-header %}
+
+{% block content %}
+
+{% for post in posts %}
+
+	<!-- mit css: Imageoverlayer -->
+
+	 <div class="container-flex col-md-6 col-lg-6">
+		<div class="content">
+	        <a href="{{ post.get_absolute_url }}">
+	        <div class="content-overlay"></div>
+			<img class="content-image" src="/media/starterImages/22.jpg">
+			<div class="content-details fadeIn-bottom">
+<h3 class="content-title">{{ post.title|capfirst }}</h3>
+	            <p class="content-text">{{ post.content | safe | truncatewords:8|linebreaks }}
+	            Comments (Approved): {{ post.approved_comments.count }}</p>
+	        </div>
+			</a>
+		</div>
+     </div>
+            {% endfor %}
+
+	{% endblock content %}
+     <!-- Pagination not neccesary-->
+	{% block pagination %}
+<div class="flex p-4"body style="background-color:rgb(209, 209, 209);">{% include 'pagination.html' %}</div>
+	{% endblock pagination %}
+
+
+
+     {% block sidebar %}
+		{% include 'blog/blog-sidebar.html' %}
+	  {% endblock sidebar %}

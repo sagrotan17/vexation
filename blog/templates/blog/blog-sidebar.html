@@ -1,0 +1,39 @@
+{% load blog_tags %}
+{% load static %}
+    
+      {% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/styles-blog.css' %}"><!-- erzeugt noch einen Abstand der Container zum Rand -->
+
+      {% endblock stylesheet%}
+    
+
+{% block sidebar %}
+<!-- Beginn 1. container-fluid der Sidebar-Block -->
+<div class="container-fluid">
+	<div class="d-flex p-4" body style="background-color:rgb(224, 125, 4);color: black;">Additionals | Blog</div>
+
+	<div class="d-flex p-4">Gesamtzahl aller Posts: {% count_total_posts %}</div>
+	<div class="d-flex p-4"><a href="{% url 'post_feed' %}">RSS Feeds |subscribe</a></div>
+</div><!-- Ende 1. container fluid -->
+
+<!-- Beginn 2. container-fluid der Sidebar-Block -->
+<div class="container-fluid">
+	<div class="d-flex p-4"body style="background-color:rgb(224, 125, 4);color: black;">Meist kommentierte Posts</div>
+
+	    {% get_most_commented_posts as most_commented_posts %}
+        {% for post in most_commented_posts %}
+	<div class="d-flex p-4"><a href="{{ post.get_absolute_url }}">{{ post.title }}"</div>  
+	{% endfor %}
+</div><!-- Ende 2. container fluid -->
+
+<!-- Beginn 3. container-fluid der Sidebar-Block -->
+<div class="container-fluid">
+	<div class="d-flex p-4" body style="background-color:rgb(224, 125, 4);color: black;">Neueste Posts</div>
+	    {% get_latest_posts as latest_posts %}
+        {% for post in latest_posts %}
+
+	<div class="d-flex p-4"><a href="{{ post.get_absolute_url }}">{{ post.title }}</div>
+	{% endfor %}
+
+
+{% endblock sidebar %}

@@ -1,0 +1,41 @@
+{% extends "base.html"  %}
+
+
+{% block title %}
+    Blog - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="content">
+        <div class="section-inner clearfix">
+
+        {% for post in posts %}
+            <h4>
+                <a href="{{ post.get_absolute_url }}">{{ post.title|capfirst }}</a>
+            </h4>
+            <p>{{ post.content | safe | truncatewords:20|linebreaks }}</p>
+            <a href="{{ post.get_absolute_url }}">Comments (Approved): {{ post.approved_comments.count }}</a>
+            <p class="post-info">
+
+                {% include 'blog/post_info.html' %}
+
+            </p>
+        {% empty %}
+            <p>Leider ist kein Post verfügbar</p>
+        {% endfor %}
+
+        </div>
+    </div>
+    <!-- Pagination -->
+{% include 'pagination.html' %}
+
+{% endblock %}
+{% block sidebar %}
+{% include 'blog/blog-sidebar.html' %}
+{% endblock sidebar %}
+
+
+
+
+

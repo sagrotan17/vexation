@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Beginn: Head -->
+
+{% block title %}vexation | {{ gallery.title }}{% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/demo.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/elastislide.css' %}">
+{% endblock stylesheet %}
+
+
+
+{% block head %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<noscript>
+			<style>
+				.es-carousel ul{
+					display:block;
+				}
+			</style>
+		</noscript>
+		<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">
+			<div class="rg-image-wrapper">
+
+					<div class="rg-image-nav">
+						<a href="#" class="rg-image-nav-prev">Previous Image</a>
+						<a href="#" class="rg-image-nav-next">Next Image</a>
+					</div>
+
+				<div class="rg-image"></div>
+				<div class="rg-loading"></div>
+				<div class="rg-caption-wrapper">
+					<div class="rg-caption" style="display:none;">
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</script>
+
+
+{% endblock head %}
+<!-- endblock head
+
+<!-- Beginn des HMTL Bodys mit dem NAV Bereich als erstes (<body> ): -->
+
+<!-- Hier fängt der eigentliche Body an -->
+{% block body %}
+
+
+{% block content %}
+
+    <div class="container">
+
+				<h1>{{ gallery.title | capfirst }}</h1>
+				<div id="rg-gallery" class="rg-gallery">
+					<div class="rg-thumbs">
+						<!-- Elastislide Carousel Thumbnail Viewer -->
+						<div class="es-carousel-wrapper">
+							<div class="es-nav">
+								<span class="es-nav-prev">Previous</span>
+								<span class="es-nav-next">Next</span>
+							</div>
+							<div class="es-carousel">
+								<ul>
+
+                                    {% for photo in photos %}
+									{% if photo.image %}
+
+
+                                    <li><a href="#"><img src='{{ photo.image.url }}' data-large='{{ photo.image.url }}' class='img-responsive' data-description="{{ photo.title }}"/></a></li>
+
+
+
+									{% endif %}
+									{% endfor %}
+
+                                </ul>
+							</div>
+						</div>
+						<!-- End Elastislide Carousel Thumbnail Viewer -->
+					</div><!-- rg-link-thumbs -->
+				</div><!-- rg-gallery -->
+				<p class="sub">Mehr Infos? <a href="#" target="_blank">Hier könnte ein Link sein</a></p>
+			</div><!-- content -->
+		</div><!-- container -->
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+{% endblock body %}
+<!-- ende des Blockbody Tags aber noch VOR dem HTML Body Ende Tag, weil am Schluss noch
+    die JQuery kommt: jQuery first, then Bootstrap JS. -->
+{% block javascript %}
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	 <script src="{% static 'js/jquery.tmpl.min.js' %}"></script>
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+	<script src="{% static 'js/jquery.elastislide.js' %}"></script>
+	<script src="{% static 'js/gallery.js' %}"></script>
+
+{% endblock javascript %}
+
+
+<!-- Dann kommt das HTML Body Ende Tag ( </body> ) und danach der Footer-->
+

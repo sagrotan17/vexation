@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}vexation{% endblock title %}
+
+
+{% block body %}
+
+{% block content %}
+<div class="container">
+
+        <div class="section-inner clearfix">
+            <h5>Welcome</h5>
+            <p class="context">
+            ... ach was soll ich schreiben? Irgendwie bin ich mit Python auf Django gestoßen - und schon saß
+            ich da und die Bastelei ging los. Raus kam diese Seite.
+            Das Design kann Bootstrap 4 nicht verleugnen. Aber damit habe ich mich weniger beschäftigt, als einfach
+            mit in den Topf geworfen.<br>
+            Es handelt sich übrigens um die Django Version 1.11 (LTV). Sollte ich in diesem Leben noch mal Zeit haben,
+            werde ich auf die aktuelle 2.0 (oder dann eher 2.9;O) umbauen.
+            <p>
+        </div>
+
+            <div class="section-inner clearfix">
+            <h5>Photographie</h5>
+            <p class="context">
+            Die Abstände der Phototouren werden zwar immer größer, aber es kommt immer noch was bei rum, um die Gallery
+                zu befüllen.
+            <p>
+        </div>
+
+            <div class="section-inner clearfix">
+            <h5>Blog | Techblog</h5>
+            <p class="context">
+            Hier werde ich voraussichtlich am meisten aktiv sein. Eine Kommentarfunktion ist nun auch implementiert. Aber
+                nicht wundern - es kann schon mal den ein oder anderen Tag dauern, bis ich sie freigebe. Bösartigkeiten
+                können aber auch per Email abgeschickt werden - ich bin da nicht so.
+            <p>
+            </div>
+
+        <div class="section-inner clearfix">
+            <h5>Gallery Vorlage | Codrops</h5>
+            <p class="context">
+            Die Gallery Vorlage ist von Codrops - mit geringfügige Änderungen, um sie unter Django zu implementieren. Sie
+            ist im Netz unter "Responsive Image Gallery" (A JQuery image gallery with a thumbnail carousel) zu finden. Mir
+            gefiel das Konzept, für jede Fotoserie eine eigene Gallerie zu erstellen. https://tympanus.net/codrops/. Auf
+            der Seite wird ausführlich in einem Tutorial gezeigt, wie der Quellcode angepasst werden kann.
+            <p>
+        </div>
+
+            <div class="section-inner clearfix">
+            <h5>Django Tutorials</h5>
+            <p class="context">
+            Leider habe ich kaum aktuelle Tutorials auf deutsch gefunden, wenn überhaupt. Ohne englisch kommt man hier
+                kaum weit. Ähnlich sieht es bei gedruckten Werken aus - die Bücher sind vorwiegend auf englisch.
+                Die Webseite von Vito Freitas ist sehr empfehlenswert (simpleisbetterthancomplex). Er hat ein 7-teiliges Tutorial
+                gemacht, das unheimlich viele Aspekte von Django abdeckt. Zudem kann er sehr gut erklären. Für absolute Anfänger
+                empfielt sich die Seite "Djangogirls" - und eben immer wieder der Blick in die Django Documentation.
+            <p>
+        </div>
+
+            <div class="section-inner clearfix">
+            <h5>... was noch fehlt und auch weiterhin fehlen wird</h5>
+            <p class="context">
+            Zwitscherlinks, Facebook, Like-Buttons und diverse andere Sozialen Netzwerke findet man hier immer noch nicht.
+            <p>
+        </div>
+
+
+
+</div>
+
+
+
+{% endblock content %}
+{% endblock body %}

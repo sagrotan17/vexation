@@ -1,0 +1,72 @@
+{% extends "base.html"  %}
+{% load static %}
+
+{% block title %}
+{{ block.super }}
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'skins_synHighl/styles/dracula.css' %}">
+<script src="{% static 'skins_synHighl/highlight.pack.js' %}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock stylesheet%}
+
+     {% block body-header %}
+        {{ post.category.name }}
+     {% endblock body-header %}
+
+     {% block breadcrumb %}
+     {% endblock breadcrumb %}
+
+{% block content %}
+<div class="col-sm-11" body style="background-color:rgb(141, 141, 141);">
+    <div class="content">
+        <div class="section-inner clearfix">
+            <h4>{{ post.title|capfirst }}</h4>
+            <p class="post-info">
+
+                {% include 'blog/post_info.html' %}
+
+            <p>
+                {{ post.content|safe }}<br>
+            </p>
+            {% if post.video_file == 'Sorry, es gibt kein Video zum Post' %}
+            <p>Zu diesem Beitrag gibt es kein Video!</p>
+
+            {% else %}
+            <video width="320" height="240"  type="video/mp4" controls><source src="{{ post.video_file.url }}">/<source>
+             Your browser does not support HTML5 video!</video>
+            {% endif %}
+
+        </div>
+
+        <!-- here now additional tags for the comment: -->
+
+<a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+{% for comment in post.comments.all %}
+
+    {% if comment.approved_comment %}
+        <div class="comment">
+            <div class="date">
+                {{ comment.created_date }}
+                {% if not comment.approved_comment %}
+                    <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                {% endif %}
+            </div>
+            <strong>{{ comment.author }}</strong>
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+    {% endif %}
+{% empty %}
+<p>Bisher wurde kein Kommentar geschrieben.</p>
+{% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block sidebar %}
+{% include 'blog/blog-sidebar.html' %}
+{% endblock sidebar %}
+
+

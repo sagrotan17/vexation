@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load gallery_tags %}
+{% block title %}{{ category.title }}{% endblock title %}
+{% block stylesheet %}
+
+
+<link rel="stylesheet" href="/static/css/animate.min.css">
+<link rel="stylesheet" href="/static/css/cards-gallery.css">
+<link rel="stylesheet" href="{% static 'css/background-black.css' %}">
+
+{% endblock stylesheet %}
+
+
+{% block body %}
+
+{% block content %}
+
+
+
+
+ <section class="gallery-block cards-gallery">
+	    <div class="container">
+	        <div class="heading">
+	          <h2>Gallerien der Kategorie | {{ category.title }}</h2>
+	        </div>
+	        <div class="row">
+
+								{% for gallery in galleries %}
+								{% fader as f %}
+	           <div class="col-md-6 col-lg-4 animated {{ f }}">
+	                <div class="card border-0 transform-on-hover">
+	                	<a class="lightbox">
+
+
+	                		<img src="{{ gallery.starter_image.url }}" alt="{{ gallery.title }}" class="card-img-top">
+	                	</a>
+
+	                    <div class="card-body">
+	                        <h5>{{ gallery.title }}</h5>
+							<p class="text-muted card-text">{{ gallery.description|safe|truncatewords:8 }}</p>
+							<a href="{% url 'gallery_detail' gallery.pk gallery.slug %}">Weiter</a>
+
+
+                        </div>
+
+	                </div>
+	            </div>
+				{% endfor %}
+
+			</div>
+</div>
+</section>
+ <!-- Pagination -->
+<div class="text-center">
+<div class="pagination">
+
+        <p>
+            {% if galleries.has_previous %}
+                <a href="?page={{ galleries.previous_page_number }}">&lt; Prev</a> |
+            {% endif %}
+
+            {% if galleries.has_next %}
+                <a href="?page={{ galleries.next_page_number }}">Next &gt;</a>
+            {% endif %}
+
+            <span>Page {{ galleries.number }} of {{ galleries.paginator.num_pages }}</span>
+        </p>
+    </div>
+	</div>
+<!-- folgende beiden schliessenden Tags unter Pagination genommen, damit es mittiger wird. Funzt nicht wirkllich... -->
+
+
+
+
+{% endblock content %}
+{% endblock body %}

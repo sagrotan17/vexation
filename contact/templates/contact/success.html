@@ -1,0 +1,15 @@
+<!-- templates/success.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Kontakt{% endblock title %}
+
+{% block body %}
+
+      <div class="container">
+
+        {% block content %}
+          <h3>Nachricht wurde erfolgreich verschickt</h3>
+          {% endblock %}
+      </div>
+
+{% endblock body %}

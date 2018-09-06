@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load recaptcha2 %}
+
+ {% block head %} {% recaptcha_init %} {% endblock head %}
+
+
+
+{% block content %}
+    <h1>Neuer Kommentar</h1><br>
+
+        <form method="POST" class="post-form">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+          <button type="submit" class="save btn btn-default">Senden</button>
+    </form>
+{% endblock %}
